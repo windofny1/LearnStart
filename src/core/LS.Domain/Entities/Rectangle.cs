@@ -11,7 +11,7 @@ namespace LS.Domain.Entities
     /// Класс, описывающий прямоугольник
     /// </summary>
     public class Rectangle:Shape
-    {
+    { 
         /// <summary>
         /// Ширина прямоугольника
         /// </summary>

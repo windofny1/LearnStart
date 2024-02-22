@@ -10,24 +10,32 @@ namespace LS.Infrastracture.Persistence.Repositories
 {
     public class RectangleRepository : IRectangleRepository
     {
+        private static List<Rectangle> _rectangleList=new List<Rectangle>();
         public Rectangle Add(Rectangle rectangle)
         {
-            throw new NotImplementedException();
+            _rectangleList.Add(rectangle);
+            return rectangle;
         }
 
-        public Rectangle GetById(Guid Id)
+        public Rectangle? GetById(Guid Id) 
         {
-            throw new NotImplementedException();
+            //LINQ
+            return _rectangleList.
+                Where(m => m.Id == Id).FirstOrDefault();
         }
 
         public void Remove(Rectangle rectangle)
         {
-            throw new NotImplementedException();
+            _rectangleList.Remove(rectangle);
         }
 
         public Rectangle Update(Rectangle rectangle)
         {
-            throw new NotImplementedException();
+            var index = _rectangleList.IndexOf(rectangle);
+            if (index >= 0) {
+              return  _rectangleList[index] = rectangle;
+            }
+            return rectangle;
         }
     }
 }
