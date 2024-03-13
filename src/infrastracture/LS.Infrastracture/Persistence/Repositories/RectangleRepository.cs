@@ -37,5 +37,15 @@ namespace LS.Infrastracture.Persistence.Repositories
             }
             return rectangle;
         }
+        public List<Rectangle> GetList(string name)
+        { 
+            if (string.IsNullOrEmpty(name))
+            {
+                return new List<Rectangle>();
+            }
+            //LINQ
+            return _rectangleList.Where(rectangle => rectangle.
+            Name.ToLower().StartsWith(name.ToLower())).ToList();
+        }
     }
 }

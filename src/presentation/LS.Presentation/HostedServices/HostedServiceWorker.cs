@@ -1,4 +1,5 @@
 ﻿using LS.Application.Common.Interfaces.Services;
+using LS.Presentation.Utilities;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -16,37 +17,44 @@ namespace LS.Presentation.HostedServices
             _rectangleService = rectangleService;
         }        
         public async Task StartAsync(CancellationToken cancellationToken)
-        { 
-            await Task.Delay(1);
-            BuildMenu(); 
+        {  
+            await BuildMenu(); 
         }
-        private void BuildMenu()
+        private async Task BuildMenu()
         {
-            Console.WriteLine("Выберите пункт меню для начала:");
-            Console.WriteLine("1 - Добавить объект");
-            Console.WriteLine("2 - Получить объект");
-            var key = Console.ReadKey();
-            Console.Clear();
-            switch (key.KeyChar)
+            while (true)
             {
-                case '1':
-                    var newRect = new Domain.Entities.Rectangle()
-                    {
-                        X = 0,
-                        Y = 0,
-                        Width = 100,
-                        Height = 100,
-                        Id = Guid.NewGuid(),
-                        Name = $"Прямоугольник от {DateTime.Now.ToString()}"
-                    };
-                    Console.WriteLine($"Создан прямоугольник Id: {newRect.Id}, Name= {newRect.Name}");
-                    _rectangleService.Add(newRect);
-                    break;
-                case '2':
-                    break;
-                default:
-                    break;
+                Console.WriteLine("Выберите пункт меню для начала:");
+                Console.WriteLine("1 - Добавить объект");
+                Console.WriteLine("2 - Получить объект");
+                var key = Console.ReadKey();
+                Console.Clear();
+                switch (key.KeyChar)
+                {
+                    case '1':
+                        Console.WriteLine("Укажите имя объекта: ");
+                        var newRect = RectangleUtilities.Create(Console.ReadLine() ?? "");
+                        Console.WriteLine($"Создан прямоугольник Id: {newRect.Id}, Name= {newRect.Name}");
+                        _rectangleService.Add(newRect);
+                        //var rectStr = _rectangleService.SerializeToString(newRect);
+                        //Console.WriteLine(rectStr);
+                        //await _rectangleService.SerializeToFile(newRect, "rectangle.txt");
+                        //var getRect = _rectangleService.DeserializeFromString(rectStr);
+                        break;
+                    case '2':
+                        Console.WriteLine("Пожалуйста, введите имя объекта:");
 
+                        var resultList = _rectangleService.GetList(Console.ReadLine() ?? "");
+                        resultList.ForEach(rectangle => Console.WriteLine($"Прямоугольник - {rectangle.Name}"));
+                        if (resultList.Count > 0)
+                        {
+                            _rectangleService.GetById(resultList[0].Id);
+                        }
+                        break;
+                    default:
+                        break;
+
+                }
             }
         }
 

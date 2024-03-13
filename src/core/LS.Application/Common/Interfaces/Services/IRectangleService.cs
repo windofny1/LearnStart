@@ -13,5 +13,9 @@ namespace LS.Application.Common.Interfaces.Services
         Rectangle Update(Rectangle rectangle);
         void Remove(Rectangle rectangle);
         Rectangle? GetById(Guid Id);
+        string SerializeToString(Rectangle rectangle);
+        Task SerializeToFile(Rectangle rectangle, string pathToFile);
+        Rectangle? DeserializeFromString(string json);
+        List<Rectangle> GetList(string name);
     }
 }

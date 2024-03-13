@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
  using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace LS.Infrastracture.Services
@@ -18,11 +19,11 @@ namespace LS.Infrastracture.Services
         }
         public Domain.Entities.Rectangle Add(Rectangle rectangle)
         {
-           if (rectangle.Height < 0)
+            if (rectangle.Height < 0)
             {
                 throw new Exception("Высота не может иметь отрицательное значение");
             }
-           return _rectangleRepository.Add(rectangle); 
+            return _rectangleRepository.Add(rectangle);
         }
 
         public Rectangle? GetById(Guid Id)
@@ -37,7 +38,28 @@ namespace LS.Infrastracture.Services
 
         public Rectangle Update(Rectangle rectangle)
         {
-           return _rectangleRepository.Update(rectangle);
+            return _rectangleRepository.Update(rectangle);
+        }
+        public string SerializeToString(Rectangle rectangle)
+        {
+            return JsonSerializer.Serialize(rectangle, new JsonSerializerOptions()
+            {
+                WriteIndented = true
+            });
+        }
+        public Rectangle? DeserializeFromString(string json)
+        {
+            return JsonSerializer.Deserialize<Rectangle>(json);
+        }
+        public async Task SerializeToFile(Rectangle rectangle, string pathToFile)
+        {
+            await using FileStream createStream = File.Create(pathToFile);
+            await JsonSerializer.SerializeAsync(createStream, rectangle);
+        }
+
+        public List<Rectangle> GetList(string name)
+        {
+            return _rectangleRepository.GetList(name);
         }
     }
 }

@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace LS.Application.Common.Interfaces.Repositories
 {
-    public interface IRectangleRepository:
-        IBaseRepository<Rectangle>
-    { 
-        List<Rectangle> GetList(string name);
+    public interface ICircleRepository: IBaseRepository<Circle>
+    {
     }
 }
