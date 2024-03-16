@@ -1,4 +1,5 @@
-﻿using LS.Domain.Entities;
+﻿using LS.Application.Common.Interfaces.Services.Base;
+using LS.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +8,9 @@ using System.Threading.Tasks;
 
 namespace LS.Application.Common.Interfaces.Services
 {
-    public interface IRectangleService
+    public interface IRectangleService:IBaseService<Rectangle>
     {
-        Rectangle Add(Rectangle rectangle);
-        Rectangle Update(Rectangle rectangle);
-        void Remove(Rectangle rectangle);
-        Rectangle? GetById(Guid Id);
-        string SerializeToString(Rectangle rectangle);
-        Task SerializeToFile(Rectangle rectangle, string pathToFile);
-        Rectangle? DeserializeFromString(string json);
+         
         List<Rectangle> GetList(string name);
     }
 }

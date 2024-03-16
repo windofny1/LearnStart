@@ -1,5 +1,6 @@
 ﻿using LS.Application.Common.Interfaces.Repositories;
 using LS.Domain.Entities;
+using LS.Infrastracture.Persistence.Repositories.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,35 +9,11 @@ using System.Threading.Tasks;
 
 namespace LS.Infrastracture.Persistence.Repositories
 {
-    public class RectangleRepository : IRectangleRepository
+    public class RectangleRepository : 
+        BaseRepository<Rectangle>,
+        IRectangleRepository
     {
-        private static List<Rectangle> _rectangleList=new List<Rectangle>();
-        public Rectangle Add(Rectangle rectangle)
-        {
-            _rectangleList.Add(rectangle);
-            return rectangle;
-        }
-
-        public Rectangle? GetById(Guid Id) 
-        {
-            //LINQ
-            return _rectangleList.
-                Where(m => m.Id == Id).FirstOrDefault();
-        }
-
-        public void Remove(Rectangle rectangle)
-        {
-            _rectangleList.Remove(rectangle);
-        }
-
-        public Rectangle Update(Rectangle rectangle)
-        {
-            var index = _rectangleList.IndexOf(rectangle);
-            if (index >= 0) {
-              return  _rectangleList[index] = rectangle;
-            }
-            return rectangle;
-        }
+         
         public List<Rectangle> GetList(string name)
         { 
             if (string.IsNullOrEmpty(name))
@@ -44,7 +21,8 @@ namespace LS.Infrastracture.Persistence.Repositories
                 return new List<Rectangle>();
             }
             //LINQ
-            return _rectangleList.Where(rectangle => rectangle.
+            return _objectList.
+                Where(rectangle => rectangle.
             Name.ToLower().StartsWith(name.ToLower())).ToList();
         }
     }

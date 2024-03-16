@@ -13,7 +13,8 @@ namespace LS.Infrastracture
         {
             services.AddScoped<IRectangleRepository, RectangleRepository>();
             services.AddScoped<IRectangleService, RectangleService>();
-          
+           
+
             return services;
 
         }

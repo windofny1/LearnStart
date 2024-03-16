@@ -1,4 +1,6 @@
 ﻿using LS.Application.Common.Interfaces.Services;
+using LS.Domain.Entities;
+using LS.Infrastracture.Services;
 using LS.Presentation.Utilities;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -12,6 +14,7 @@ namespace LS.Presentation.HostedServices
     public class HostedServiceWorker : IHostedService
     {
         private readonly IRectangleService _rectangleService;
+  
         public HostedServiceWorker(IRectangleService rectangleService)
         {
             _rectangleService = rectangleService;
@@ -22,11 +25,14 @@ namespace LS.Presentation.HostedServices
         }
         private async Task BuildMenu()
         {
+            List<Rectangle> DataList = new List<Rectangle>();
             while (true)
             {
                 Console.WriteLine("Выберите пункт меню для начала:");
                 Console.WriteLine("1 - Добавить объект");
                 Console.WriteLine("2 - Получить объект");
+                Console.WriteLine("3 - Сохранить список");
+                Console.WriteLine("4 - Получить список");
                 var key = Console.ReadKey();
                 Console.Clear();
                 switch (key.KeyChar)
@@ -36,6 +42,7 @@ namespace LS.Presentation.HostedServices
                         var newRect = RectangleUtilities.Create(Console.ReadLine() ?? "");
                         Console.WriteLine($"Создан прямоугольник Id: {newRect.Id}, Name= {newRect.Name}");
                         _rectangleService.Add(newRect);
+                        DataList.Add(newRect);
                         //var rectStr = _rectangleService.SerializeToString(newRect);
                         //Console.WriteLine(rectStr);
                         //await _rectangleService.SerializeToFile(newRect, "rectangle.txt");
@@ -50,6 +57,15 @@ namespace LS.Presentation.HostedServices
                         {
                             _rectangleService.GetById(resultList[0].Id);
                         }
+                        break;
+                    case '3':
+                        await  _rectangleService.SerializeToFile(DataList,"dataList.txt");
+                        
+                        break;
+                    case '4':
+                        DataList = await _rectangleService.
+                            DeserializeFromFile("dataList.txt") ?? new List<Rectangle>();
+                        DataList.ForEach(rectangle => Console.WriteLine(rectangle.Name));
                         break;
                     default:
                         break;
