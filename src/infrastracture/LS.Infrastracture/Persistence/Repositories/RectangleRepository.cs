@@ -16,10 +16,7 @@ namespace LS.Infrastracture.Persistence.Repositories
          
         public List<Rectangle> GetList(string name)
         { 
-            if (string.IsNullOrEmpty(name))
-            {
-                return new List<Rectangle>();
-            }
+            
             //LINQ
             return _objectList.
                 Where(rectangle => rectangle.
