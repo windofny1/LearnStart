@@ -13,9 +13,7 @@ namespace LS.MAUIClient
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
-           
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            
         }
     }
 

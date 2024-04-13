@@ -1,4 +1,5 @@
 ﻿using LS.Infrastracture;
+using LS.MAUIClient.Pages;
 using LS.MAUIClient.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,15 @@ namespace LS.MAUIClient
         }
         public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
         {
-            mauiAppBuilder.Services.AddSingleton<MainPageViewModel>(); 
+            mauiAppBuilder.Services.AddSingleton<MainPageViewModel>();
+            mauiAppBuilder.Services.AddSingleton<AddRectangleViewModel>();
             return mauiAppBuilder;
         }
         public static MauiAppBuilder RegisterPages(this MauiAppBuilder mauiAppBuilder)
         {
 
             mauiAppBuilder.Services.AddSingleton<MainPage>();
-         
+            mauiAppBuilder.Services.AddSingleton<AddRectanglePage>(); 
 
             return mauiAppBuilder;
         }

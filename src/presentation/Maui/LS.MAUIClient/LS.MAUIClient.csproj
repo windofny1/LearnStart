@@ -71,4 +71,10 @@
 	  <ProjectReference Include="..\..\..\infrastracture\LS.Infrastracture\LS.Infrastracture.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="Pages\AddRectanglePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
