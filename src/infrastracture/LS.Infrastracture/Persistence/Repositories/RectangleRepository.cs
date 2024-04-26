@@ -20,7 +20,7 @@ namespace LS.Infrastracture.Persistence.Repositories
             //LINQ
             return _objectList.
                 Where(rectangle => rectangle.
-            Name.ToLower().StartsWith(name.ToLower())).ToList();
+            Name.ToLower().StartsWith((name ?? "").ToLower())).ToList();
         }
     }
 }

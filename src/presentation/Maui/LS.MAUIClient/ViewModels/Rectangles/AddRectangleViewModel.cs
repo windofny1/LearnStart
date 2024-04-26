@@ -9,13 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LS.MAUIClient.ViewModels
+namespace LS.MAUIClient.ViewModels.Rectangles
 {
     public partial class AddRectangleViewModel: BaseViewModel
     {
-        private readonly IRectangleService _rectangleService;
+     
         [ObservableProperty]
-        private Rectangle rectangle = new();
+        private LS.Domain.Entities.Rectangle rectangle = new();
+        private readonly IRectangleService _rectangleService;
         public AddRectangleViewModel()
         {
 
@@ -25,15 +26,18 @@ namespace LS.MAUIClient.ViewModels
             _rectangleService = rectangleService;
         }
         [RelayCommand]
-        public void AddRectangle()
+        public async Task AddRectangle()
         { 
-            _rectangleService.Add(new Rectangle()
+            _rectangleService.Add(new LS.Domain.Entities.Rectangle()
             {
+                Id=Guid.NewGuid(),
                 Height = rectangle.Height,
                 Width = rectangle.Width,
                 Name = rectangle.Name
-            }); 
+            });
+            await Shell.Current.GoToAsync(".."); 
         }
+       
       
     }
 }

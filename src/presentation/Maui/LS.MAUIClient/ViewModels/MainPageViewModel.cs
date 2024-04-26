@@ -20,11 +20,7 @@ namespace LS.MAUIClient.ViewModels
         {
 
         }
-        [RelayCommand]
-        public async void GoToAddRectangle()
-        {
-            await Shell.Current.GoToAsync(Routes.AddRectanglePageRoute);
-        }
+      
 
     }
 }

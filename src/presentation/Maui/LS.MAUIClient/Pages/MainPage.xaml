@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:LS.MAUIClient.ViewModels"
-             x:Class="LS.MAUIClient.MainPage"
+             x:Class="LS.MAUIClient.Pages.MainPage"
              x:DataType="viewModels:MainPageViewModel" >
 
     <ScrollView>
@@ -40,12 +40,7 @@
        SemanticProperties.HeadingLevel="Level2"
        SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
 
-            <Button Grid.Column="0" Grid.Row="3"
-         Grid.ColumnSpan="2" 
-         Text="Добавить прямоугольник" 
-         SemanticProperties.Hint="Добавить прямоугольник"
-         Command="{Binding GoToAddRectangleCommand}" 
-         HorizontalOptions="Fill" />
+      
 
         </Grid> 
     </ScrollView>

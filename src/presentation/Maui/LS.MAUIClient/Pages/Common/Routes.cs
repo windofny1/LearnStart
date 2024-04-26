@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LS.MAUIClient.Pages.Rectangles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,8 @@ namespace LS.MAUIClient.Pages.Common
 {
     public static class Routes
     {
-        public static string MainRoute { get; } = "pages/mainPage";
-        public static string AddRectanglePageRoute { get; } = "pages/addRectangle";
+        public static string MainRoute { get; } = nameof(MainPage);
+        public static string AddRectanglePageRoute { get; } = nameof(AddRectanglePage);
+        public static string RectangleRoute { get; } = nameof(RectanglePage);
     }
 }

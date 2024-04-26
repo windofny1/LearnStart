@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:LS.MAUIClient.ViewModels.Rectangles"
+             xmlns:domainModels="clr-namespace:LS.Domain.Entities;assembly=LS.Domain"
+             x:Class="LS.MAUIClient.Pages.Rectangles.RectanglePage"
+             x:DataType="viewModels:RectanglePageViewModel"
+             Title="Прямоугольники">
+    <VerticalStackLayout HorizontalOptions="FillAndExpand">
+        <Button 
+   Text="Добавить прямоугольник" 
+   SemanticProperties.Hint="Добавить прямоугольник"
+   Command="{Binding GoToAddRectangleCommand}" 
+   HorizontalOptions="Fill" />
+
+        <HorizontalStackLayout HorizontalOptions="FillAndExpand">
+            <Entry WidthRequest="200" Text="{Binding Search}" />
+            <Button 
+                 Text="Поиск" 
+                 SemanticProperties.Hint="Поиск"
+                 Command="{Binding SearchListCommand}" 
+                 HorizontalOptions="Fill" />
+        </HorizontalStackLayout>
+
+        <CollectionView  ItemsSource="{Binding RectangleList}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="domainModels:Rectangle" >
+                    <Grid Padding="10" ColumnSpacing="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" /> 
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                      
+                        <Label Grid.Column="0" Text="{Binding Name}" HorizontalOptions="CenterAndExpand" FontSize="20" />
+                        <Label Grid.Column="1" Text="{Binding Width}" HorizontalOptions="CenterAndExpand" FontSize="20" />
+                        <Label Grid.Column="2" Text="{Binding Height}" HorizontalOptions="CenterAndExpand" FontSize="20"  />
+                      
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+           
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

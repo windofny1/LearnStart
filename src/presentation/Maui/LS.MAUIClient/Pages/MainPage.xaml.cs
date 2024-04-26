@@ -1,6 +1,6 @@
 ﻿using LS.MAUIClient.ViewModels;
 
-namespace LS.MAUIClient
+namespace LS.MAUIClient.Pages
 {
     public partial class MainPage : ContentPage
     {
