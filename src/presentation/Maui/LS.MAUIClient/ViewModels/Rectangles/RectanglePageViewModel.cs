@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using LS.Application.Common.Interfaces.Services;
 using LS.Domain.Entities;
 using LS.MAUIClient.Pages.Common;
+using LS.MAUIClient.Pages.Rectangles;
 using LS.MAUIClient.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -31,12 +32,18 @@ namespace LS.MAUIClient.ViewModels.Rectangles
             RectangleList=_rectangleService.GetList(Search); 
         }
         [RelayCommand]
-        public async void GoToAddRectangle()
+        public async Task GoToAddRectangle()
         {
-            await Shell.Current.GoToAsync(Routes.AddRectanglePageRoute, new ShellNavigationQueryParameters
-    {
-        { "Id", "test" }
-    });
+            await Shell.Current.GoToAsync(Routes.AddRectanglePageRoute);
+        }
+        [RelayCommand]
+        public async Task GoToEditRectangle(Rectangle rect)
+        { 
+            await Shell.Current.GoToAsync(Routes.AddRectanglePageRoute,
+                new ShellNavigationQueryParameters
+                {
+                    { nameof(AddRectanglePage.QueryId),rect.Id}
+                });
         }
         [RelayCommand]
         public void SearchList()

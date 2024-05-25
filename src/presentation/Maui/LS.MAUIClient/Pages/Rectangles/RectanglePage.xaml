@@ -39,7 +39,14 @@
                         <Label Grid.Column="0" Text="{Binding Name}" HorizontalOptions="CenterAndExpand" FontSize="20" />
                         <Label Grid.Column="1" Text="{Binding Width}" HorizontalOptions="CenterAndExpand" FontSize="20" />
                         <Label Grid.Column="2" Text="{Binding Height}" HorizontalOptions="CenterAndExpand" FontSize="20"  />
-                      
+                        <Button   Grid.Column="3" 
+                                  Text="Ред." 
+                                  SemanticProperties.Hint="Ред."
+                                  Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:RectanglePageViewModel}}, 
+                            Path=GoToEditRectangleCommand}"
+                                   CommandParameter="{Binding}"
+                               
+                                  HorizontalOptions="Fill" />     
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

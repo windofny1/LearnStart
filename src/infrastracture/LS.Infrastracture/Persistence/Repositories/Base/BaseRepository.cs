@@ -32,10 +32,11 @@ namespace LS.Infrastracture.Persistence.Repositories.Base
 
         public T Update(T rectangle)
         {
-            var index = _objectList.IndexOf(rectangle);
-            if (index >= 0)
+            var findedObject = _objectList.Where(m=>m.Id==rectangle.Id).FirstOrDefault();
+            if (findedObject!=null)
             {
-                return _objectList[index] = rectangle;
+                return _objectList[_objectList.IndexOf(findedObject)] = rectangle;
+               
             }
             return rectangle;
         }

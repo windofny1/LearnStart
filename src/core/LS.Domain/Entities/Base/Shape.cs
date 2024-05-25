@@ -15,6 +15,7 @@ namespace LS.Domain.Entities.Base
         /// Идентификатор
         /// </summary>
         public Guid Id { get; set; }
+       
         /// <summary>
         /// Координата X
         /// </summary>
@@ -26,6 +27,19 @@ namespace LS.Domain.Entities.Base
         /// <summary>
         /// Название фигуры
         /// </summary>
-        public string Name { get; set; } = string.Empty; 
+    
+        private string _name = string.Empty;
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+            }
+        }
+   
     }
 }

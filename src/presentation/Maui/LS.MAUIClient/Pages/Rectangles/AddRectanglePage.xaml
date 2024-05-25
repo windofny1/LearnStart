@@ -30,9 +30,9 @@
 
             <Button Grid.Column="0" Grid.Row="3"
                  Grid.ColumnSpan="2" 
-                 Text="Добавить" 
-                 SemanticProperties.Hint="Добавить прямоугольник"
-                 Command="{Binding AddRectangleCommand}" 
+                 Text="Сохранить" 
+                 SemanticProperties.Hint="Сохранить прямоугольник"
+                 Command="{Binding SaveRectangleCommand}" 
                  HorizontalOptions="Fill" />
 
         </Grid>

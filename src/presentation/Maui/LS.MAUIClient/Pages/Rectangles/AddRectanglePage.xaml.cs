@@ -3,14 +3,37 @@ using LS.MAUIClient.ViewModels.Rectangles;
 
 namespace LS.MAUIClient.Pages.Rectangles;
 
-[QueryProperty(nameof(Id), "Id")]
-partial class AddRectanglePage : ContentPage
+
+partial class AddRectanglePage : ContentPage, IQueryAttributable
 {
-	public string Id { get; set; }
+	public Guid? QueryId { get; set; }
     private readonly AddRectangleViewModel _addRectangleViewModel;
-    public AddRectanglePage(AddRectangleViewModel addRectangleViewModel)
+
+	public void ApplyQueryAttributes(IDictionary<string, object> query)
+	{
+        QueryId = null;
+
+        if (query.ContainsKey(nameof(QueryId)))
+		{
+            QueryId = (Guid?)query[nameof(QueryId)];
+        }		
+    }
+        public AddRectanglePage(AddRectangleViewModel addRectangleViewModel)
 	{
 		InitializeComponent();
 		BindingContext = _addRectangleViewModel = addRectangleViewModel;
 	}
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (QueryId != null)
+        {
+            _addRectangleViewModel.EditId = QueryId;
+            _addRectangleViewModel.LoadRectangle(QueryId.Value);
+        }
+        else
+        {
+            _addRectangleViewModel.EditId = null;
+        }
+    }
 }
